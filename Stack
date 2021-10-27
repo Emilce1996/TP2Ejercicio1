@@ -1,0 +1,117 @@
+package tp2ejercicio1;
+
+public class Stack<Generico> {
+ 
+    private final static Integer dimencion=10;
+ 
+    private Generico contenedor[];
+    private Integer count;
+ 
+    public Stack (){
+        this(Stack.dimencion);   
+    }
+    
+    public Stack(Integer dimencion){
+        if (dimencion <=0){
+            throw new RuntimeException("La cantidad de elementos en la  pila debe ser positiva");
+        }
+        this.contenedor = (Generico[]) new Object[dimencion];
+        this.count = 0;
+    }
+
+    public boolean empty() {
+        return this.count <= 0;
+    }
+
+    public Generico peek() {
+        if (this.empty()) {
+            throw new RuntimeException("La pila está vacía...");
+        }
+        return this.contenedor[this.count - 1];
+    }
+    
+    public Generico pop() {
+        if (this.empty()) {
+            throw new RuntimeException("La pila está vacía...");
+        }
+        --this.count;
+        return this.contenedor[this.count];
+    }
+    
+    public Generico push(Generico element) {
+        if (this.size() >= this.contenedor.length) {
+ 
+            Generico [] temp = (Generico[]) new Object[this.contenedor.length * 2];
+            for (int i = 0; i < this.contenedor.length; ++i) {
+                temp[i] = this.contenedor[i];
+            }
+            this.contenedor = temp;
+        }
+        this.contenedor[this.count] = element;
+        ++this.count;
+        return element;
+    }
+
+    public int search(Object object) {
+        for (int pos = this.count - 1; pos >= 0; --pos) {
+            if (this.contenedor[pos].equals(object)) {
+                return this.count - pos;
+            }
+        }
+        return -1;
+    }
+
+    public int size() {
+        return this.count;
+    }
+
+    @Override
+    public String toString() {
+ 
+        if (this.size() <=0) {
+            return "";
+        }
+ 
+        StringBuilder sb = new StringBuilder();
+        sb.append("[").append(this.contenedor[0].toString());
+        for (int i = 1; i < this.size(); ++i) {
+            sb.append(", ").append(this.contenedor[i].toString());
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+    
+    public  int eliminarElemento(String elemento){
+        int contador=0;
+        for (int i=0;i<this.count ;i++){
+            if (this.contenedor[i].equals(elemento)){
+                this.contenedor[i]=this.contenedor[i+1];
+                contador++;
+            }
+        }
+        count=count-contador;
+        return contador;
+    }
+ 
+    public static Integer getDimencion() {
+        return dimencion;
+    }
+ 
+    public Generico[] getContenedor() {
+        return contenedor;
+    }
+ 
+    public void setContenedor(Generico[] contenedor) {
+        this.contenedor = contenedor;
+    }
+ 
+    public Integer getCount() {
+        return count;
+    }
+ 
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+    
+    
+}
