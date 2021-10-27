@@ -1,0 +1,28 @@
+package tp2ejercicio1;
+import java.util.Scanner;
+
+public class Helper {
+    
+    public static Scanner read = new Scanner(System.in);
+    
+    private static Integer validarEntero(String inputMessage, String errorMessage) {
+        while (true) {
+                try {
+                    System.out.println(inputMessage);
+                    return Integer.parseInt(read.nextLine());
+                }catch (NumberFormatException e) {System.out.println(errorMessage);}
+        }
+    }
+    
+    public static Integer validarEntero(String inputMessage) {
+        return validarEntero(inputMessage,"\nError: El valor ingresado no es un número entero");
+    }
+    
+    public static void menu() {
+        System.out.println("MENU CARGAR PILA");
+        System.out.println("1_Ingresar valores manualmente.");
+        System.out.println("2_Generar valores aleatorios.");
+        System.out.println("3_Salir.");
+    }
+    
+}
