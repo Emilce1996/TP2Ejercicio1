@@ -1,0 +1,94 @@
+package tp2ejercicio1;
+import java.util.*;
+
+public class TP2Ejercicio1 {
+
+    
+    public static void main(String[] args) {
+    Stack<String> pila = new Stack <> ();
+    int opcion=0;
+    while(opcion!=3){
+        Helper.menu();
+        opcion = Helper.validarEntero("Ingrese una opción:");
+        switch(opcion){
+            case 1:
+                cargarPila(pila);
+                System.out.println(pila);
+                eliminarElementoPila(pila);
+                System.out.println(pila);
+                break;
+            case 2:
+                cargarRandom(pila);
+                System.out.println(pila);
+                eliminarElementoPila(pila);
+                System.out.println(pila);
+                break;
+        }
+    }
+    }
+    
+    public static Scanner read = new Scanner(System.in);
+    
+    public static void cargarPila(Stack <String> pila){
+        String vector;
+        String continuar ="s";
+        while (continuar.equalsIgnoreCase("s")){
+            vector = cargarLetra("Ingresar un caracter");
+            pila.push(vector);
+            System.out.println("Seguir Cargando Caracteres? [s/n]");
+            continuar=read.nextLine();
+        }
+    }
+ 
+    public static void eliminarElementoPila(Stack <String> pila){
+        String vector;
+        String continuar ="s";
+        int total=0;
+        while (continuar.equalsIgnoreCase("s")){
+            vector = cargarLetra("Ingresar un caracter a eliminar");
+            total+=pila.eliminarElemento(vector);
+            System.out.println("Seguir eliminando caracteres? [s/n]");
+            continuar=read.nextLine();
+        }
+        System.out.println( "Elementos Eliminados " + total);
+    }
+ 
+    public static String cargarLetra(String mensaje){
+        System.out.println(mensaje);
+        String linea=read.nextLine();
+        while(validarLetras(linea)||linea.length()<=0){
+            System.out.println("''ERROR'' No Ingresar Numeros o mas de un caracter");
+            System.out.println(mensaje);
+            linea=read.nextLine();
+        }
+        return linea;
+    }
+    
+    public static boolean validarLetras(String linea) {
+        for (int x = 0; x < linea.length(); x++) {
+            char c = linea.charAt(x);
+            if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == ' ')) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public static String caracterRandom() {
+        Random random = new Random();
+        char caracterRandom = (char)(random.nextInt(26) + 'a');
+        System.out.println("Caracter generado: "+ caracterRandom);
+        String caracter = String.valueOf(caracterRandom);
+        return caracter;
+    }
+    public static void cargarRandom(Stack <String> pila){
+        String vector;
+        String continuar ="s";
+        while (continuar.equalsIgnoreCase("s")){
+            vector = caracterRandom();
+            pila.push(vector);
+            System.out.println("Seguir Cargando Caracteres? [s/n]");
+            continuar=read.nextLine();
+        }
+ 
+    }
+}
